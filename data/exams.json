@@ -1,0 +1,360 @@
+[
+ {
+  "kind": "final",
+  "name": "TH Ngoại khoa 1 (đợt 1) K3+4",
+  "k": [
+   3,
+   4
+  ],
+  "date": "2026-07-24",
+  "date_end": "2026-07-24",
+  "time": "07:00",
+  "time_raw": "7h00",
+  "room": "ATCS"
+ },
+ {
+  "kind": "midterm",
+  "name": "Thần kinh - Hành vi",
+  "k": null,
+  "date": "2026-08-10",
+  "date_end": "2026-08-10",
+  "time": "13:30",
+  "time_raw": "13h30",
+  "room": "3A, 3B, lầu 10"
+ },
+ {
+  "kind": "qa",
+  "name": "Thần kinh - Hành vi",
+  "k": null,
+  "date": "2026-08-18",
+  "date_end": "2026-08-18",
+  "time": "13:00",
+  "time_raw": "13h00",
+  "room": "6A"
+ },
+ {
+  "kind": "final",
+  "name": "TH Giải phẫu Thần Kinh- hành vi",
+  "k": null,
+  "date": "2026-08-19",
+  "date_end": "2026-08-19",
+  "time": "13:00",
+  "time_raw": "13h00",
+  "room": "Lab Giải phẫu"
+ },
+ {
+  "kind": "final",
+  "name": "TH ATCS Thần kinh - Hành vi",
+  "k": null,
+  "date": "2026-08-20",
+  "date_end": "2026-08-21",
+  "time": "13:00",
+  "time_raw": "13h00",
+  "room": "ATCS"
+ },
+ {
+  "kind": "final",
+  "name": "Thần kinh - Hành vi (LT+TH PM)",
+  "k": null,
+  "date": "2026-08-24",
+  "date_end": "2026-08-24",
+  "time": "13:30",
+  "time_raw": "13h30",
+  "room": "3A, 3B, lầu 10"
+ },
+ {
+  "kind": "midterm",
+  "name": "Hệ Tiêu Hóa",
+  "k": null,
+  "date": "2026-09-21",
+  "date_end": "2026-09-21",
+  "time": "13:00",
+  "time_raw": "13h00",
+  "room": "3A, 3B, lầu 10"
+ },
+ {
+  "kind": "qa",
+  "name": "Hệ Tiêu Hóa",
+  "k": null,
+  "date": "2026-10-03",
+  "date_end": "2026-10-03",
+  "time": "08:00",
+  "time_raw": "08h00",
+  "room": "6A"
+ },
+ {
+  "kind": "final",
+  "name": "Hệ Tiêu Hóa (LT+TT PM)",
+  "k": null,
+  "date": "2026-10-05",
+  "date_end": "2026-10-05",
+  "time": "13:30",
+  "time_raw": "13h30",
+  "room": "3A, 3B, lầu 10"
+ },
+ {
+  "kind": "final",
+  "name": "TT Giải phẫu Hệ Tiêu Hóa",
+  "k": null,
+  "date": "2026-10-06",
+  "date_end": "2026-10-06",
+  "time": "13:00",
+  "time_raw": "13h00",
+  "room": "Lab Giải phẫu"
+ },
+ {
+  "kind": "midterm",
+  "name": "Dịch tễ học",
+  "k": null,
+  "date": "2026-10-23",
+  "date_end": "2026-10-23",
+  "time": "13:30",
+  "time_raw": "13h30",
+  "room": "3A, lầu 10 ( thi 2 ca)"
+ },
+ {
+  "kind": "final",
+  "name": "Dân số học (LT)",
+  "k": null,
+  "date": "2026-10-26",
+  "date_end": "2026-10-26",
+  "time": "13:30",
+  "time_raw": "13h30",
+  "room": "3A, 3B, lầu 10"
+ },
+ {
+  "kind": "final",
+  "name": "Dịch tễ học (LT)",
+  "k": null,
+  "date": "2026-10-30",
+  "date_end": "2026-10-30",
+  "time": "13:30",
+  "time_raw": "13h30",
+  "room": "3A, 3B, lầu 10"
+ },
+ {
+  "kind": "final",
+  "name": "TH Ngoại khoa 2 + 3 (đợt 1) K3+4",
+  "k": [
+   3,
+   4
+  ],
+  "date": "2026-11-02",
+  "date_end": "2026-11-04",
+  "time": "07:00",
+  "time_raw": "7h00",
+  "room": "ATCS"
+ },
+ {
+  "kind": "final",
+  "name": "TH Nội khoa 1 + 2 (đợt 1) K1+2",
+  "k": [
+   1,
+   2
+  ],
+  "date": "2026-11-03",
+  "date_end": "2026-11-05",
+  "time": "13:00",
+  "time_raw": "13h00",
+  "room": "ATCS"
+ },
+ {
+  "kind": "final",
+  "name": "TH Ngoại khoa 1 (đợt 2) K1+2",
+  "k": [
+   1,
+   2
+  ],
+  "date": "2026-11-20",
+  "date_end": "2026-11-20",
+  "time": "07:00",
+  "time_raw": "7h00",
+  "room": "ATCS"
+ },
+ {
+  "kind": "midterm",
+  "name": "Hệ Nội Tiết",
+  "k": null,
+  "date": "2026-11-30",
+  "date_end": "2026-11-30",
+  "time": "13:30",
+  "time_raw": "13h30",
+  "room": "3A, 3B, lầu 10"
+ },
+ {
+  "kind": "final",
+  "name": "Dinh dưỡng (LT)",
+  "k": null,
+  "date": "2026-12-14",
+  "date_end": "2026-12-14",
+  "time": "13:30",
+  "time_raw": "13h30",
+  "room": "3A, 3B, lầu 10"
+ },
+ {
+  "kind": "qa",
+  "name": "Hệ Nội Tiết",
+  "k": null,
+  "date": "2026-12-14",
+  "date_end": "2026-12-14",
+  "time": "15:30",
+  "time_raw": "15h30",
+  "room": "A (Giải Phẫu)"
+ },
+ {
+  "kind": "final",
+  "name": "Hệ Nội Tiết (LT)",
+  "k": null,
+  "date": "2026-12-21",
+  "date_end": "2026-12-21",
+  "time": "13:30",
+  "time_raw": "13h30",
+  "room": "3A, 3B, lầu 10"
+ },
+ {
+  "kind": "qa",
+  "name": "Hệ Cơ Xương Khớp",
+  "k": null,
+  "date": "2027-01-18",
+  "date_end": "2027-01-18",
+  "time": "13:30",
+  "time_raw": "13h30",
+  "room": "GĐ 2"
+ },
+ {
+  "kind": "final",
+  "name": "Hệ Cơ Xương Khớp (LT)",
+  "k": null,
+  "date": "2027-02-15",
+  "date_end": "2027-02-15",
+  "time": "13:30",
+  "time_raw": "13h30",
+  "room": "3A, 3B, lầu 10"
+ },
+ {
+  "kind": "final",
+  "name": "TH Giải phẫu Cơ Xương Khớp",
+  "k": null,
+  "date": "2027-02-19",
+  "date_end": "2027-02-19",
+  "time": "13:00",
+  "time_raw": "13h00",
+  "room": "Lab Giải phẫu"
+ },
+ {
+  "kind": "final",
+  "name": "TH ATCS Cơ Xương Khớp",
+  "k": null,
+  "date": "2027-02-22",
+  "date_end": "2027-02-25",
+  "time": "13:00",
+  "time_raw": "13h00",
+  "room": "ATCS"
+ },
+ {
+  "kind": "final",
+  "name": "Hệ Da (LT)",
+  "k": null,
+  "date": "2027-03-01",
+  "date_end": "2027-03-01",
+  "time": "13:30",
+  "time_raw": "13h30",
+  "room": "3A, 3B, lầu 10"
+ },
+ {
+  "kind": "midterm",
+  "name": "Hệ Sinh sản",
+  "k": null,
+  "date": "2027-03-19",
+  "date_end": "2027-03-19",
+  "time": "13:30",
+  "time_raw": "13h30",
+  "room": "3A, 3B, lầu 10"
+ },
+ {
+  "kind": "final",
+  "name": "THCSN 3 (Giải Phẫu) -Hệ Sinh sản -Hệ Nội tiết",
+  "k": null,
+  "date": "2027-03-22",
+  "date_end": "2027-03-22",
+  "time": "07:00",
+  "time_raw": "07h00",
+  "room": "Lab Giải phẫu"
+ },
+ {
+  "kind": "qa",
+  "name": "Hệ Sinh sản",
+  "k": null,
+  "date": "2027-03-23",
+  "date_end": "2027-03-23",
+  "time": "07:00",
+  "time_raw": "7h00-10h35",
+  "room": "K1+2 (07h00-8h40) K3+4 (8h40-10h35) 6A"
+ },
+ {
+  "kind": "final",
+  "name": "Dinh dưỡng - VSATTP (LT)",
+  "k": null,
+  "date": "2027-03-26",
+  "date_end": "2027-03-26",
+  "time": "13:30",
+  "time_raw": "13h30",
+  "room": "3A, 3B, lầu 10"
+ },
+ {
+  "kind": "final",
+  "name": "THCSN 3 (Phòng máy) -Hệ Sinh sản -Hệ Nội tiết -Hệ Dinh dưỡng -Hệ da",
+  "k": null,
+  "date": "2027-03-29",
+  "date_end": "2027-03-29",
+  "time": "13:30",
+  "time_raw": "13h30",
+  "room": "3A, 3B, lầu 10"
+ },
+ {
+  "kind": "final",
+  "name": "TH Nội khoa 1+2 (đợt 2) K3+4",
+  "k": [
+   3,
+   4
+  ],
+  "date": "2027-03-30",
+  "date_end": "2027-04-01",
+  "time": "07:00",
+  "time_raw": "7h00",
+  "room": "ATCS"
+ },
+ {
+  "kind": "final",
+  "name": "TH Ngoại khoa 2 + 3 (đợt 2) K1+2",
+  "k": [
+   1,
+   2
+  ],
+  "date": "2027-03-31",
+  "date_end": "2027-04-02",
+  "time": "13:00",
+  "time_raw": "13h00",
+  "room": "ATCS"
+ },
+ {
+  "kind": "final",
+  "name": "Hệ Sinh sản (LT)",
+  "k": null,
+  "date": "2027-04-05",
+  "date_end": "2027-04-05",
+  "time": "07:30",
+  "time_raw": "7h30",
+  "room": "3A, 3B, lầu 10"
+ },
+ {
+  "kind": "final",
+  "name": "THCSN 3 (ATCS) -Hệ Nội tiết -Hệ da",
+  "k": null,
+  "date": "2027-04-06",
+  "date_end": "2027-04-07",
+  "time": "13:00",
+  "time_raw": "13h00",
+  "room": "ATCS"
+ }
+]

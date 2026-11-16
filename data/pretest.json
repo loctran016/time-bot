@@ -1,0 +1,236 @@
+[
+ {
+  "module": "THẦN KINH - HÀNH VI",
+  "name": "Hội chứng Guillain-Barre",
+  "dow": "T2",
+  "date": "2026-07-27",
+  "open": "17:00",
+  "close": "17:30",
+  "time_raw": "17h00-17h30"
+ },
+ {
+  "module": "THẦN KINH - HÀNH VI",
+  "name": "Bệnh tủy sống",
+  "dow": "T2",
+  "date": "2026-08-03",
+  "open": "17:00",
+  "close": "17:30",
+  "time_raw": "17h00-17h30"
+ },
+ {
+  "module": "THẦN KINH - HÀNH VI",
+  "name": "Nhồi máu não",
+  "dow": "T2",
+  "date": "2026-08-10",
+  "open": "17:00",
+  "close": "17:30",
+  "time_raw": "17h00-17h30"
+ },
+ {
+  "module": "HỆ TIÊU HÓA",
+  "name": "Tiêu chảy cấp",
+  "dow": "Chủ nhật",
+  "date": "2026-09-13",
+  "open": "17:00",
+  "close": "17:30",
+  "time_raw": "17h00 - 17h30"
+ },
+ {
+  "module": "HỆ TIÊU HÓA",
+  "name": "Loét dạ dày-Tá tràng do Heli...",
+  "dow": "Chủ nhật",
+  "date": "2026-09-13",
+  "open": "17:30",
+  "close": "18:00",
+  "time_raw": "17h30-18h00"
+ },
+ {
+  "module": "HỆ TIÊU HÓA",
+  "name": "Xơ gan",
+  "dow": "T2",
+  "date": "2026-09-21",
+  "open": "18:00",
+  "close": "18:30",
+  "time_raw": "18h00-18h30"
+ },
+ {
+  "module": "HỆ TIÊU HÓA",
+  "name": "Viêm tụy cấp do sỏi",
+  "dow": "Chủ nhật",
+  "date": "2026-09-27",
+  "open": "17:00",
+  "close": "17:30",
+  "time_raw": "17h00-17h30"
+ },
+ {
+  "module": "HỆ NỘI TIẾT",
+  "name": "Đái tháo đường",
+  "dow": "T2",
+  "date": "2026-11-09",
+  "open": "17:30",
+  "close": "18:00",
+  "time_raw": "17h30-18h00"
+ },
+ {
+  "module": "HỆ NỘI TIẾT",
+  "name": "Hồi chứng cường giáp và suy giáp",
+  "dow": "Chủ nhật",
+  "date": "2026-11-15",
+  "open": "17:30",
+  "close": "18:00",
+  "time_raw": "17h30-18h00"
+ },
+ {
+  "module": "DINH DƯỠNG",
+  "name": "Béo phì và dinh dưỡng",
+  "dow": "T2",
+  "date": "2026-11-23",
+  "open": "17:00",
+  "close": "17:30",
+  "time_raw": "17h00-17h30"
+ },
+ {
+  "module": "HỆ NỘI TIẾT",
+  "name": "Bướu giáp",
+  "dow": "T2",
+  "date": "2026-11-30",
+  "open": "17:30",
+  "close": "18:00",
+  "time_raw": "17h30-18h00"
+ },
+ {
+  "module": "HỆ NỘI TIẾT",
+  "name": "Hội chứng Cushing",
+  "dow": "Chủ nhật",
+  "date": "2026-12-06",
+  "open": "17:30",
+  "close": "18:00",
+  "time_raw": "17h30-18h00"
+ },
+ {
+  "module": "HỆ CƠ XƯƠNG KHỚP",
+  "name": "Chuyển hóa xương: chu chuyển xương, tu chỉnh và tái tu chỉnh",
+  "dow": "T2",
+  "date": "2026-12-14",
+  "open": "17:00",
+  "close": "17:30",
+  "time_raw": "17h00-17h30"
+ },
+ {
+  "module": "HỆ CƠ XƯƠNG KHỚP",
+  "name": "Khớp: chuyển hóa sụn khớp",
+  "dow": "T2",
+  "date": "2026-12-14",
+  "open": "17:30",
+  "close": "18:00",
+  "time_raw": "17h30-18h00"
+ },
+ {
+  "module": "HỆ CƠ XƯƠNG KHỚP",
+  "name": "Dây chằng cơ sinh học và chức năng",
+  "dow": "T2",
+  "date": "2026-12-21",
+  "open": "17:00",
+  "close": "17:30",
+  "time_raw": "17h00-17h30"
+ },
+ {
+  "module": "HỆ CƠ XƯƠNG KHỚP",
+  "name": "Tiếp cận chấn thương cơ quan vận động",
+  "dow": "Chủ nhật",
+  "date": "2026-12-27",
+  "open": "17:00",
+  "close": "17:30",
+  "time_raw": "17h00-17h30"
+ },
+ {
+  "module": "HỆ CƠ XƯƠNG KHỚP",
+  "name": "Tiếp cận đau vùng khớp không do chấn thương",
+  "dow": "Chủ nhật",
+  "date": "2026-12-27",
+  "open": "17:30",
+  "close": "18:00",
+  "time_raw": "17h30-18h00"
+ },
+ {
+  "module": "HỆ CƠ XƯƠNG KHỚP",
+  "name": "Nhiễm trùng khớp",
+  "dow": "T2",
+  "date": "2027-01-04",
+  "open": "17:00",
+  "close": "17:30",
+  "time_raw": "17h00-17h30"
+ },
+ {
+  "module": "HỆ CƠ XƯƠNG KHỚP",
+  "name": "Bệnh khớp do viêm,Tiếp cận đau cổ",
+  "dow": "T2",
+  "date": "2027-01-04",
+  "open": "17:30",
+  "close": "18:00",
+  "time_raw": "17h30-18h00"
+ },
+ {
+  "module": "HỆ CƠ XƯƠNG KHỚP",
+  "name": "Tiếp cận đau vùng thắc lưng",
+  "dow": "T2",
+  "date": "2027-01-11",
+  "open": "17:00",
+  "close": "17:30",
+  "time_raw": "17h00-17h30"
+ },
+ {
+  "module": "HỆ DA",
+  "name": "Viêm da cơ địa",
+  "dow": "T2",
+  "date": "2027-01-11",
+  "open": "17:30",
+  "close": "17:45",
+  "time_raw": "17h30-17h45"
+ },
+ {
+  "module": "HỆ DA",
+  "name": "Stevents-johnson",
+  "dow": "T2",
+  "date": "2027-01-18",
+  "open": "17:00",
+  "close": "17:15",
+  "time_raw": "17h00-17h15"
+ },
+ {
+  "module": "HỆ SINH SẢN",
+  "name": "Pretest chương 1",
+  "dow": "T2",
+  "date": "2027-03-01",
+  "open": "18:00",
+  "close": "18:20",
+  "time_raw": "18h00-18h20"
+ },
+ {
+  "module": "HỆ SINH SẢN",
+  "name": "Pretest chương 2",
+  "dow": "Chủ nhật",
+  "date": "2027-03-07",
+  "open": "18:00",
+  "close": "18:20",
+  "time_raw": "18h00-18h20"
+ },
+ {
+  "module": "HỆ SINH SẢN",
+  "name": "Pretest chương 3",
+  "dow": "T2",
+  "date": "2027-03-08",
+  "open": "18:00",
+  "close": "18:20",
+  "time_raw": "18h00-18h20"
+ },
+ {
+  "module": "HỆ SINH SẢN",
+  "name": "Pretest chương 4",
+  "dow": "T2",
+  "date": "2027-03-15",
+  "open": "18:00",
+  "close": "18:20",
+  "time_raw": "18h00-18h20"
+ }
+]

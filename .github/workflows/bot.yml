@@ -1,0 +1,53 @@
+name: bot-lich-hoc
+on:
+  schedule:
+    - cron: "0 0 * * 0"        # Chủ nhật 07:00 giờ VN -> gửi lịch học tuần sau
+    - cron: "*/15 8-11 * * *"  # 15:00-18:59 giờ VN, mỗi 15 phút -> nhắc pretest
+  workflow_dispatch:           # bấm tay (app GitHub trên điện thoại) hoặc cron-job.org gọi API
+    inputs:
+      cmd:
+        description: "Lệnh"
+        type: choice
+        default: lich-hoc
+        options: [lich-hoc, lich-thi, pretest, khdt, weekly, tick]
+      date:
+        description: "(tuỳ chọn, cho lich-hoc) YYYY-MM-DD: xem tuần chứa ngày này"
+        required: false
+        default: ""
+concurrency:
+  group: bot
+  cancel-in-progress: false
+permissions:
+  contents: write
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Chạy bot
+        env:
+          TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
+          TG_CHAT_ID: ${{ secrets.TG_CHAT_ID }}
+          USER_K: "2"
+          EVENT: ${{ github.event_name }}
+          SCHEDULE: ${{ github.event.schedule }}
+          INPUT_CMD: ${{ inputs.cmd }}
+          INPUT_DATE: ${{ inputs.date }}
+        run: |
+          if [ "$EVENT" = "schedule" ]; then
+            if [ "$SCHEDULE" = "0 0 * * 0" ]; then CMD=weekly; else CMD=tick; fi
+          else
+            CMD="$INPUT_CMD"
+          fi
+          if [ "$CMD" = "weekly" ]; then date -u +"%Y-%m-%dT%H:%MZ" > data/heartbeat.txt; fi
+          python scripts/notify.py "$CMD" $INPUT_DATE
+      - name: Lưu trạng thái nhắc (chống gửi trùng) + heartbeat
+        run: |
+          git config user.name "bot"
+          git config user.email "bot@users.noreply.github.com"
+          git add data/sent.json data/heartbeat.txt 2>/dev/null || true
+          if ! git diff --cached --quiet; then git commit -m "bot: cập nhật trạng thái" && git push; fi
