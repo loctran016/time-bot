@@ -2,6 +2,7 @@ name: bot-lich-hoc
 on:
   schedule:
     - cron: "0 0 * * 0"        # Chủ nhật 07:00 giờ VN -> gửi lịch học tuần sau
+    - cron: "0 11 * * *"       # 18:00 giờ VN mỗi ngày -> gửi lịch học ngày mai
     - cron: "*/15 8-11 * * *"  # 15:00-18:59 giờ VN, mỗi 15 phút -> nhắc pretest
   workflow_dispatch:           # bấm tay (app GitHub trên điện thoại) hoặc cron-job.org gọi API
     inputs:
@@ -9,9 +10,9 @@ on:
         description: "Lệnh"
         type: choice
         default: lich-hoc
-        options: [lich-hoc, lich-thi, pretest, khdt, weekly, tick]
+        options: [lich-hoc, ngay-mai, lich-thi, pretest, khdt, weekly, tick]
       date:
-        description: "(tuỳ chọn, cho lich-hoc) YYYY-MM-DD: xem tuần chứa ngày này"
+        description: "(tuỳ chọn, cho lich-hoc / ngay-mai) YYYY-MM-DD"
         required: false
         default: ""
 concurrency:
@@ -39,7 +40,9 @@ jobs:
           INPUT_DATE: ${{ inputs.date }}
         run: |
           if [ "$EVENT" = "schedule" ]; then
-            if [ "$SCHEDULE" = "0 0 * * 0" ]; then CMD=weekly; else CMD=tick; fi
+            if [ "$SCHEDULE" = "0 0 * * 0" ]; then CMD=weekly
+            elif [ "$SCHEDULE" = "0 11 * * *" ]; then CMD=ngay-mai
+            else CMD=tick; fi
           else
             CMD="$INPUT_CMD"
           fi
