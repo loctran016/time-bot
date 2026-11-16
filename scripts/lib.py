@@ -8,7 +8,7 @@ USER_K = int(os.environ.get("USER_K", "2"))
 KTAG = re.compile(r"\bK\s*([1-4](?:\s*[+&,]\s*K?\s*[1-4])*)", re.I)
 KBARE = re.compile(r"(?<![\dhH:/])\b[1-4]\s*\+\s*[1-4]\b")
 DOW_VI = ["Thứ 2", "Thứ 3", "Thứ 4", "Thứ 5", "Thứ 6", "Thứ 7", "Chủ nhật"]
-KIND_VI = {"midterm": "Giữa kỳ", "final": "Cuối kỳ", "qa": "Giải đáp thắc mắc"}
+KIND_VI = {"midterm": "Giữa kỳ", "final": "Cuối kỳ", "qa": "Giải đáp"}
 EXAM_WINDOW_DAYS = 30
 
 def load(name):
@@ -26,11 +26,18 @@ def dow(d): return DOW_VI[d.weekday()]
 def k_ok(ks, k=None): return ks is None or (k or USER_K) in ks
 
 # ---------- lịch học ----------
+SEP = "━━━━━━━━━━━━━━━━━━"
+
 def _title(line):
     t = re.sub(r"\s*\(.*?\)", "", line)
     t = KTAG.sub("", t); t = KBARE.sub("", t)
     t = re.sub(r"\bB\d+\b", "", t)
     return re.sub(r"\s+", " ", t).strip(" :-–")
+
+def _ls_name(s):
+    s = re.sub(r"(KHOA)\s*(\d)", r"\1 \2", s.strip(" :-–"), flags=re.I)
+    s = re.sub(r"NGOẠ(?!I)", "NGOẠI", s)          # lỗi chính tả trong nguồn
+    return s.lower().capitalize()
 
 def render_item(it):
     L = it["lines"]
@@ -41,10 +48,11 @@ def render_item(it):
     for l in L:
         m = re.search(r"GĐ\s*:\s*(.+)$", l)
         if m: loc = m.group(1).strip()
+    note = ""
     if first.lower().startswith("thực hành lâm sàng") and len(L) > 1:
-        sub = _title(L[-1].split("(")[0]) or ""
+        title = "LS " + _ls_name(_title(L[-1].split("(")[0]))
         tail = re.search(r"\((.*?)\)", L[-1])
-        title = f"{first}: {sub}" + (f" ({tail.group(1)})" if tail else "")
+        note = tail.group(1) if tail else ""
         details = ""
     else:
         title = _title(first)
@@ -52,9 +60,9 @@ def render_item(it):
         for l in L[1:]:
             l = re.sub(r"(TBL\s*[–-]\s*)?GĐ\s*:.*$", "", l).strip()
             l = KTAG.sub("", l).strip(" -–")
-            if l and not re.fullmatch(r"[\W\d+K]*", l): d.append(l.lstrip("- ").strip())
+            if l and not re.fullmatch(r"[\W\dK+]*", l): d.append(l.lstrip("- ").strip())
         details = ", ".join(d)
-    return dict(kind="class", title=title, details=details, loc=loc,
+    return dict(kind="class", title=title, details=details, note=note, loc=loc,
                 start=it["start"], end=it["end"])
 
 def day_lines(day, k=None):
@@ -62,7 +70,7 @@ def day_lines(day, k=None):
     cls = [r for r in rs if r["kind"] == "class"]
     cls.sort(key=lambda r: (r["start"], r["end"]))
     merged = []
-    for r in cls:  # gộp các buổi liền nhau cùng bài (B3+B4 -> 13h00-16h35)
+    for r in cls:  # gộp các buổi liền nhau cùng bài (B3+B4 -> 13:00-16:35)
         p = merged[-1] if merged else None
         if p and (p["title"], p["details"], p["loc"]) == (r["title"], r["details"], r["loc"]) \
                 and p["end"] == r["start"]:
@@ -71,23 +79,34 @@ def day_lines(day, k=None):
             merged.append(dict(r))
     return merged
 
+def icon_of(title):
+    t = title.lower()
+    if t.startswith("ls "): return "🏥"
+    if t.startswith("thi") or "thi kết thúc" in t or "thi giữa" in t: return "🚨"
+    if t.startswith("nghỉ"): return "🏖"
+    if t.startswith("giải đáp"): return "💬"
+    return "📚"
+
 def fmt_class(r):
-    s = f"<b>{esc(r['title'])}</b>"
-    if r["details"]: s += f": {esc(r['details'])}"
-    if r["loc"]: s += f" (GĐ: {esc(r['loc'])})"
-    return f"• {s} từ {hm(r['start'])} đến {hm(r['end'])}"
+    ic = icon_of(r["title"])
+    time = r["start"] if (ic == "🚨" and r["end"] == "14:40") else f"{r['start']} - {r['end']}"
+    if ic == "🚨":
+        body = f"<b>{esc(r['title'])}</b>" + (f" <i>({esc(r['details'])})</i>" if r["details"] else "")
+    else:
+        body = f"<b>{esc(r['title'])}{':' if r['details'] else ''}</b>"
+        if r["details"]: body += f" {esc(r['details'])}"
+        if r["note"]: body += f" ({esc(r['note'])})"
+    if r["loc"]: body += f" <i>(GĐ: {esc(r['loc'])})</i>"
+    return f"{ic} <code>{time}</code> | {body}"
 
 def format_week(week, k=None):
     s, e = dt.date.fromisoformat(week["start"]), dt.date.fromisoformat(week["end"])
-    out = [f"📅 <b>Lịch học tuần {week['week']}</b> ({s:%d/%m/%Y} – {e:%d/%m/%Y}) · K{k or USER_K}"]
+    out = [f"📅 <b>LỊCH HỌC TUẦN {week['week']} ({s:%d/%m} – {e:%d/%m}) • K{k or USER_K}</b>", SEP]
     for day in week["days"]:
         d = dt.date.fromisoformat(day["date"])
+        out.append(f"\n<b>{dow(d)} ({d:%d/%m})</b>")
         rows = day_lines(day, k)
-        if not rows:
-            out.append(f"\n<b>{dow(d)} ({d:%d/%m})</b>: tự học")
-        else:
-            out.append(f"\n<b>{dow(d)} ({d:%d/%m})</b>")
-            out += [fmt_class(r) for r in rows]
+        out += [fmt_class(r) for r in rows] if rows else ["📖 <i>Tự học</i>"]
     return "\n".join(out)
 
 def week_of(d, weeks=None):
@@ -105,21 +124,30 @@ def week_for_command(today):
     return d, week_of(d)
 
 # ---------- lịch thi ----------
+def exam_name(e):
+    n = KTAG.sub("", e["name"]); n = KBARE.sub("", n)
+    return f"{KIND_VI[e['kind']]} {re.sub(r'[ ]+', ' ', n).strip(' -–')}"
+
+def _dm(d, today):
+    return f"{dow(d)}, {d:%d/%m}" + (f"/{d.year}" if d.year != today.year else "")
+
 def fmt_exam(e, today, k=None):
     k = k or USER_K
     d = dt.date.fromisoformat(e["date"]); de = dt.date.fromisoformat(e["date_end"])
-    when = f"{dow(d)} {d:%d/%m/%Y}" + (f" → {dow(de)} {de:%d/%m/%Y}" if de != d else "")
-    t = e["time"]
-    room = e["room"]
+    t, room = e["time"], e["room"]
     m = re.search(r"K1\+2\s*\(([^)]+)\)\s*/?\s*K3\+4\s*\(([^)]+)\)", room)
     if m:
         t = m.group(1 if k in (1, 2) else 2).split("-")[0].strip().replace("h", ":").zfill(5)
         room = room.split("/")[-1].strip()
     left = (d - today).days
-    near = "hôm nay" if left == 0 else f"còn {left} ngày"
-    return (f"• <b>{KIND_VI[e['kind']]}</b> · {esc(e['name'])}\n"
-            f"   {when}" + (f" · {hm(t)}" if t else "") +
-            (f" · {esc(room)}" if room else "") + f" ({near})")
+    if left < 0: badge = "🔥 <b>Đang diễn ra</b>"
+    elif left == 0: badge = "💥 <b>HÔM NAY</b>"
+    elif left == 1: badge = "🔥 <b>Ngày mai</b>"
+    elif left <= 7: badge = f"🔥 <b>Còn {left} ngày</b>"
+    else: badge = f"⏳ <b>Còn {left} ngày</b>"
+    when = _dm(d, today) + (f" → {_dm(de, today)}" if de != d else "")
+    parts = [when] + ([t] if t else []) + ([room] if room else [])
+    return f"{badge} • {esc(exam_name(e))}\n└ <i>{esc(' • '.join(parts))}</i>"
 
 def upcoming_exams(today, days=None, k=None):
     ex = load("exams.json")
@@ -135,52 +163,53 @@ def upcoming_exams(today, days=None, k=None):
 
 def format_exams(today, days=None, k=None):
     ex = upcoming_exams(today, days, k)
-    head = f"📝 <b>Lịch thi{' trong ' + str(days) + ' ngày tới' if days else ' còn lại'}</b>"
-    if not ex: return head + "\nKhông có kỳ thi nào."
-    return head + "\n" + "\n".join(fmt_exam(e, today, k) for e in ex)
+    head = "📝 <b>LỊCH THI CÒN LẠI</b>" if not days else f"📝 <b>LỊCH THI {days} NGÀY TỚI</b>"
+    if not ex: return f"{head}\n{SEP}\nKhông có kỳ thi nào 🎉"
+    return f"{head}\n{SEP}\n" + "\n\n".join(fmt_exam(e, today, k) for e in ex)
 
 def exam_footer(today):
     if os.environ.get("FOOTER", "1") != "1": return ""
     ex = upcoming_exams(today, EXAM_WINDOW_DAYS)
-    if not ex: return f"\n\n📝 Thi trong {EXAM_WINDOW_DAYS} ngày tới: không có."
-    return f"\n\n📝 <b>Thi trong {EXAM_WINDOW_DAYS} ngày tới</b>\n" + \
-        "\n".join(fmt_exam(e, today) for e in ex)
+    if not ex: return f"\n\n{SEP}\n🎯 <b>Không có kỳ thi nào trong {EXAM_WINDOW_DAYS} ngày tới</b> 🎉"
+    return (f"\n\n{SEP}\n🎯 <b>SẮP THI ({EXAM_WINDOW_DAYS} NGÀY TỚI)</b>\n"
+            + "\n\n".join(fmt_exam(e, today) for e in ex))
 
 # ---------- pretest ----------
 def pt_dt(p, key="open"):
     d = dt.date.fromisoformat(p["date"]); h, m = map(int, p[key].split(":"))
     return dt.datetime(d.year, d.month, d.day, h, m, tzinfo=TZ)
 
-def fmt_pt(p, now=None):
+def fmt_pt(p):
     d = dt.date.fromisoformat(p["date"])
-    dn = "Chủ nhật" if d.weekday() == 6 else f"Thứ {d.weekday() + 2}"
-    rng = hm(p["open"]) + (f"–{hm(p['close'])}" if p["close"] else "")
-    return f"<b>{esc(p['module'])}</b> – {esc(p['name'])}\n   {dn} · {d:%d/%m/%Y} · mở {rng}"
+    rng = p["open"] + (f" – {p['close']}" if p["close"] else "")
+    return f"🧪 <b>{esc(p['module'])}</b> – {esc(p['name'])}\n└ <i>{dow(d)}, {d:%d/%m} • mở {rng}</i>"
 
 def format_pretest(now, n=6):
     up = [p for p in load("pretest.json") if pt_dt(p, "close" if p["close"] else "open") >= now]
-    if not up: return "🧪 <b>Pretest</b>\nKhông còn pretest nào sắp tới."
-    return "🧪 <b>Pretest sắp tới</b>\n" + "\n".join("• " + fmt_pt(p) for p in up[:n])
+    if not up: return f"🧪 <b>PRETEST</b>\n{SEP}\nKhông còn pretest nào sắp tới 🎉"
+    return f"🧪 <b>PRETEST SẮP TỚI</b>\n{SEP}\n" + "\n\n".join(fmt_pt(p) for p in up[:n])
 
-REMIND = [("1d", dt.timedelta(days=1), "ngày mai"), ("1h", dt.timedelta(hours=1), "1 giờ nữa"),
-          ("15m", dt.timedelta(minutes=15), "15 phút nữa")]
+REMIND = [("1d", dt.timedelta(days=1), "NGÀY MAI", "📆", "Nhớ sắp xếp thời gian ôn nhé!"),
+          ("1h", dt.timedelta(hours=1), "1 GIỜ NỮA", "⏰", "Ôn nhanh lại nào, còn kịp! 💪"),
+          ("15m", dt.timedelta(minutes=15), "15 PHÚT NỮA", "🚨", "Mở máy, vào làm bài thôi! 🔥")]
 
 def due_pretests(now, sent):
-    """Trả về [(key, tin)] cho các mốc đã đến hạn, chưa gửi, và pretest chưa mở."""
+    """Trả về ([(key, tin)], [key bỏ qua]) cho các mốc đã đến hạn, chưa gửi, và pretest chưa mở."""
     out = []
     for p in load("pretest.json"):
         t0 = pt_dt(p)
-        for tag, delta, label in REMIND:
+        for tag, delta, label, ic, cheer in REMIND:
             key = f"{p['date']}|{p['open']}|{p['name']}|{tag}"
             if key in sent or now < t0 - delta or now >= t0: continue
-            out.append((key, f"⏰ <b>Pretest {label}</b>\n• " + fmt_pt(p)))
+            out.append((key, f"{ic} <b>PRETEST • {label}</b>\n{SEP}\n{fmt_pt(p)}\n\n{cheer}"))
     # chỉ giữ mốc gần nhất cho mỗi bài (nếu chạy trễ, tránh gửi dồn 3 tin)
     best = {}
     for key, msg in out:
-        base = key.rsplit("|", 1)[0]
-        order = {"1d": 0, "1h": 1, "15m": 2}[key.rsplit("|", 1)[1]]
+        base, tag = key.rsplit("|", 1)
+        order = {"1d": 0, "1h": 1, "15m": 2}[tag]
         if base not in best or order > best[base][0]: best[base] = (order, key, msg)
-    skipped = [k for k, _ in out if k not in {v[1] for v in best.values()}]
+    keep = {v[1] for v in best.values()}
+    skipped = [k for k, _ in out if k not in keep]
     return [(v[1], v[2]) for v in best.values()], skipped
 
 # ---------- Telegram ----------

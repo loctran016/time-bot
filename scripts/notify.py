@@ -23,7 +23,7 @@ def main():
     now = lib.now_vn(); today = now.date()
     if cmd == "weekly":
         nxt = today + dt.timedelta(days=7 - today.weekday())       # thứ 2 tuần sau
-        lib.send(week_msg(nxt, now) + lib.exam_footer(today))
+        lib.send("🌞 <b>Chủ nhật vui vẻ!</b> Lịch tuần tới nè 👇\n\n" + week_msg(nxt, now) + lib.exam_footer(today))
     elif cmd == "lich-hoc":
         if len(sys.argv) > 2: day = dt.date.fromisoformat(sys.argv[2])
         else: day, _ = lib.week_for_command(today)
